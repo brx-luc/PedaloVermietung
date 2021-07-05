@@ -37,7 +37,11 @@ public class PedaloController {
     @PutMapping("/{id}")
     public ResponseEntity updatePedalo(@PathVariable Long id, @RequestBody Pedalo pedalo){
         Pedalo currentPedalo = pedaloRepository.findById(id).orElseThrow(RuntimeException::new);
-        currentPedalo.setName(pedalo.getName());
+        currentPedalo.setBeschreibung(pedalo.getBeschreibung());
+        currentPedalo.setPlaetze(pedalo.getPlaetze());
+        currentPedalo.setZusatz(pedalo.getZusatz());
+        currentPedalo.setBeschreibung(pedalo.getBeschreibung());
+        currentPedalo.setPreis(pedalo.getPreis());
         currentPedalo = pedaloRepository.save(currentPedalo);
 
         return ResponseEntity.ok(currentPedalo);
