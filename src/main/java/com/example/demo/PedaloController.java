@@ -16,27 +16,26 @@ public class PedaloController {
     }
 
     @GetMapping
-    public List<Pedalo> getPedalo(){
+    public List<PedaloImpl> getPedalo(){
         return pedaloRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Pedalo getPedalo(@PathVariable Long id){
+    public PedaloImpl getPedalo(@PathVariable Long id){
         return pedaloRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @PostMapping
-    public ResponseEntity createPedalo(@RequestBody Pedalo pedalo) throws URISyntaxException {
-        Pedalo savedPedalo = pedaloRepository.save(pedalo);
+    public ResponseEntity createPedalo(@RequestBody PedaloImpl pedalo) throws URISyntaxException {
+        PedaloImpl savedPedalo = pedaloRepository.save(pedalo);
         return ResponseEntity.created(new URI("/pedalo/" + savedPedalo.getId())).body(savedPedalo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updatePedalo(@PathVariable Long id, @RequestBody Pedalo pedalo){
-        Pedalo currentPedalo = pedaloRepository.findById(id).orElseThrow(RuntimeException::new);
+    public ResponseEntity updatePedalo(@PathVariable Long id, @RequestBody PedaloImpl pedalo){
+        PedaloImpl currentPedalo = pedaloRepository.findById(id).orElseThrow(RuntimeException::new);
         currentPedalo.setBeschreibung(pedalo.getBeschreibung());
         currentPedalo.setPlaetze(pedalo.getPlaetze());
-        currentPedalo.setZusatz(pedalo.getZusatz());
         currentPedalo.setBeschreibung(pedalo.getBeschreibung());
         currentPedalo.setPreis(pedalo.getPreis());
         currentPedalo = pedaloRepository.save(currentPedalo);
