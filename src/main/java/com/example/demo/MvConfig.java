@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,5 +15,6 @@ class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
     }
+
 
 }

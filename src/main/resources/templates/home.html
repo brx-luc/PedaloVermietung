@@ -2,10 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/src/main/resources/static/CSS/style.css" th:href="@{/css/style.css}" />
 </head>
 <body>
-<h1>Welcome!</h1>
+<div id="container">
+    <h1>Ruthless Pedalo Vermietung</h1>
 
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+    <nav id="nav">
+        <a href="">Home</a>
+        <a href="">Reservation</a>
+        <a href="">Rahmenbedingungen</a>
+        <a href="">Wetter</a>
+        <a href=""> Stornierung</a>
+    </nav>
+
+    <img src="" alt="Bild">
+    <p>Herzlich Willkommen auf unserer Seite.<br>
+        Hier können Sie Pedalos reservieren.</p>
+
+    <footer class="footer">
+        <p class="footer-right">
+            <a href="" class="menu">Kontakt</a>
+            <a href="" class="menu">Impressum</a>
+            <a href="" class="menu">AGB</a>
+            <a href="" class="menu">Datenschutz</a>
+            <a th:href="@{/hello}" class="menu">Login</a>
+        </p>
+
+    </footer>
+</div>
+
+<!--<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>-->
 </body>
 </html>

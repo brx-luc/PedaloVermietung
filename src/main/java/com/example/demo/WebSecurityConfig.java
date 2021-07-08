@@ -2,7 +2,9 @@ package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/pedalo", "/", "/home").permitAll()
+                .antMatchers("/reservation","/pedalo", "/", "/home", "/css/**").permitAll()
+               //.antMatchers(HttpMethod.POST, "/pedalo/").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -28,6 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    public void configure(WebSecurity web)
+        throws Exception{
+            web.ignoring().antMatchers(HttpMethod.POST, "/pedalo", "/reservation");
+         //   web.ignoring().antMatchers(HttpMethod.POST, "/reservation");
+        }
+
+
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
@@ -35,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 User.withDefaultPasswordEncoder()
                         .username("user")
                         .password("password")
-                        .roles("USER")
+                        .roles("ADMIN")
                         .build();
 
         return new InMemoryUserDetailsManager(user);
